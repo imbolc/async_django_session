@@ -17,7 +17,7 @@ class Backend(BaseBackend):
     async def save(self, key, value, expire_date):
         async with self.pool.acquire() as con:
             if key:
-                return await self._update(con, key, value)
+                return await self._update(con, key, value, expire_date)
             return await self._insert_new(con, value, expire_date)
 
     async def _insert_new(self, con, value, expire_date):
@@ -37,11 +37,11 @@ class Backend(BaseBackend):
             break
         return key
 
-    async def _update(self, con, key, value):
+    async def _update(self, con, key, value, expire_date):
         sql = """
             UPDATE django_session
-            SET session_data = $1
-            WHERE session_key = $2
+            SET session_data = $1, expire_date = $2
+            WHERE session_key = $3
         """
-        await con.execute(sql, value, key)
+        await con.execute(sql, value, expire_date, key)
         return key

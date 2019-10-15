@@ -9,7 +9,9 @@ def middleware(storage, cookie_name="sessionid"):
         request.get_session = session.load
         response = await handler(request)
         if await session.save():
-            response.set_cookie(cookie_name, session.key)
+            response.set_cookie(
+                cookie_name, session.key, expires=session.expire_date
+            )
         return response
 
     return django_session

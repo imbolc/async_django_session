@@ -13,7 +13,7 @@ class Backend(BaseBackend):
 
     async def save(self, key, value, expire_date):
         if key:
-            return await (self._update(key, value))
+            return await (self._update(key, value, expire_date))
         else:
             return await (self._insert_new(value, expire_date))
 
@@ -37,11 +37,13 @@ class Backend(BaseBackend):
             break
         return key
 
-    async def _update(self, key, value):
+    async def _update(self, key, value, expire_date):
         sql = """
             UPDATE django_session
-            SET session_data = :value
+            SET session_data = :value, expire_date = :expire_date
             WHERE session_key = :key
         """
-        await self.db.fetch_one(sql, {"key": key, "value": value})
+        await self.db.fetch_one(
+            sql, {"key": key, "value": value, "expire_date": expire_date}
+        )
         return key

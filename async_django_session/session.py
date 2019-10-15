@@ -15,6 +15,7 @@ class Session(dict):
         self.key = key
         self.secret = secret
         self.max_age = max_age
+        self.expire_date = None
         self._loaded = False
         self._value = None
 
@@ -40,6 +41,7 @@ class Session(dict):
             self.key = None
             return
         self._value = row["session_data"]
+        self.expire_date = row["expire_date"]
         self._decode()
         return self
 
@@ -55,8 +57,8 @@ class Session(dict):
             log.debug("Skip saving of unchanged session")
             return False
         log.debug("Saving session")
-        expire_date = now_utc() + self.max_age
-        self.key = await self.storage.save(self.key, value, expire_date)
+        self.expire_date = now_utc() + self.max_age
+        self.key = await self.storage.save(self.key, value, self.expire_date)
         self._value = value
         return True
 

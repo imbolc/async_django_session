@@ -6,5 +6,7 @@ def middleware(app, backend, cookie_name="sessionid"):
         request.state.get_session = session.load
         response = await call_next(request)
         if await session.save():
-            response.set_cookie(cookie_name, session.key)
+            response.set_cookie(
+                cookie_name, session.key, expires=session.expire_date
+            )
         return response
