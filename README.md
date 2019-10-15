@@ -121,11 +121,11 @@ Run [django example][]:
 [databases]: https://github.com/encode/databases
 [django]: https://github.com/django/django
 [starlette]: https://github.com/encode/starlette
-[examples]: https://github.com/imbolc/async_django_session/examples
-[django example]: https://github.com/imbolc/async_django_session/examples/django_app.py
-[starlette example]: https://github.com/imbolc/async_django_session/examples/starlette_app.py
-[aiohttp example]: https://github.com/imbolc/async_django_session/examples/aiohttp_app.py
-[asyncpg backend]: https://github.com/imbolc/async_django_session/async_django_session/asyncpg.py
-[databases backend]: https://github.com/imbolc/async_django_session/async_django_session/databases.py
-[aiohttp middleware]: https://github.com/imbolc/async_django_session/async_django_session/aiohttp.py
-[starlette middleware]: https://github.com/imbolc/async_django_session/async_django_session/starlette.py
+[examples]: https://github.com/imbolc/async_django_session/tree/master/examples
+[django example]: https://github.com/imbolc/async_django_session/tree/master/examples/django_app.py
+[starlette example]: https://github.com/imbolc/async_django_session/tree/master/examples/starlette_app.py
+[aiohttp example]: https://github.com/imbolc/async_django_session/tree/master/examples/aiohttp_app.py
+[asyncpg backend]: https://github.com/imbolc/async_django_session/tree/master/async_django_session/asyncpg.py
+[databases backend]: https://github.com/imbolc/async_django_session/tree/master/async_django_session/databases.py
+[aiohttp middleware]: https://github.com/imbolc/async_django_session/tree/master/async_django_session/aiohttp.py
+[starlette middleware]: https://github.com/imbolc/async_django_session/tree/master/async_django_session/starlette.py
