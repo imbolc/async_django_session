@@ -4,6 +4,8 @@ Async Django Session
 It gives you ability to share session between [django][] and an async framework
 like [starlette][], [aiohttp][] etc.
 
+    pip install async-django-session
+
 API
 ---
 
