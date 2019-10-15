@@ -30,7 +30,7 @@ There's two ways of communicating to database available:
 To fetch session from db by its key there's `backend.get_session` method. If
 `key` is `None` a new session will be created:
 ```python
-session = storage.get_session(key)
+session = backend.get_session(key)
 ```
 It's lazy so the session data won't be actually fetched until you call its
 `load` method. In caches the result, so it's inexpensive to call it multiple
