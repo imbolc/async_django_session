@@ -6,6 +6,9 @@ like [starlette][], [aiohttp][] etc.
 
 API
 ---
+
+### Backends
+
 There's two ways of communicating to database available:
 
 - through [databases][] - which is compatible with most of major RDBMS:
@@ -43,9 +46,9 @@ Session provides dict-interface to read / write data:
 session["foo"] = "bar"
 print(session["foo"])
 ```
-To save session into database you should explicitly call its `save` method. It
-won't make unnecessary db call if the session wasn't changed. The boolean value
-it returns is intend to indicate if it's the case:
+To sync session with database you should explicitly call its `save` method. It
+won't make unnecessary db call if the session wasn't changed (the boolean value
+it returns is intend to indicate if it was the case).
 ```python
 saved = await session.save()
 ```
@@ -69,7 +72,7 @@ Session of a current request is available as:
 session = await request.state.get_session()
 ```
 
-A working starlette example is [here][starlette_example].
+A working starlette example is [here][starlette example].
 
 ### Aiohttp
 After adding of [session middleware][aiohttp middleware]:
@@ -83,7 +86,7 @@ You can get requests session as:
 ```python
 session = await request.get_session()
 ```
-A full aiohttp example can be found [here][aiohttp_example].
+A full aiohttp example can be found [here][aiohttp example].
 
 Running examples
 ----------------
