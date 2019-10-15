@@ -1,0 +1,5 @@
+aiohttp
+asyncpg
+django
+psycopg2-binary
+starlette
