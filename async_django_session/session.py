@@ -35,6 +35,7 @@ class Session(dict):
         row = await self.storage.load(self.key)
         if not row:
             log.debug("Session not found in DB")
+            self.key = None
             return
         if row["expire_date"] < now_utc():
             log.debug("Session is expired")
