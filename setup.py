@@ -12,7 +12,7 @@ if sys.argv[-1] == "publish":
 
 setuptools.setup(
     name="async_django_session",
-    version="0.3.0",
+    version="0.3.1",
     description="Django-compatible session for async frameworks",
     long_description=open("./README.md").read(),
     long_description_content_type="text/markdown",

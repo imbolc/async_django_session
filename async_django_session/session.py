@@ -10,11 +10,9 @@ log = logging.getLogger(__name__)
 
 
 class Session(dict):
-    def __init__(self, storage, key, secret, max_age):
-        self.storage = storage
+    def __init__(self, backend, key):
+        self.backend = backend
         self.key = key
-        self.secret = secret
-        self.max_age = max_age
         self.expire_date = None
         self._loaded = False
         self._value = None
@@ -32,7 +30,7 @@ class Session(dict):
         if not self.key:
             log.debug("It's a new session")
             return
-        row = await self.storage.load(self.key)
+        row = await self.backend.load(self.key)
         if not row:
             log.debug("Session not found in DB")
             self.key = None
@@ -58,8 +56,8 @@ class Session(dict):
             log.debug("Skip saving of unchanged session")
             return False
         log.debug("Saving session")
-        self.expire_date = now_utc() + self.max_age
-        self.key = await self.storage.save(self.key, value, self.expire_date)
+        self.expire_date = now_utc() + self.backend.max_age
+        self.key = await self.backend.save(self.key, value, self.expire_date)
         self._value = value
         return True
 
@@ -71,7 +69,7 @@ class Session(dict):
     def _encode(self):
         dump = json_dumps(self)
         hash = (
-            hmac.new(self.secret, msg=dump, digestmod=sha1)
+            hmac.new(self.backend.secret, msg=dump, digestmod=sha1)
             .hexdigest()
             .encode("ascii")
         )
